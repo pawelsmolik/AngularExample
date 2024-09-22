@@ -25,7 +25,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
         silentRenew: true,
         useRefreshToken: true,
         logLevel: LogLevel.Debug,
-        secureRoutes: ['https://localhost:7144/'],
+        secureRoutes: ['https://localhost:7144/', 'https://localhost:7072/'],
       },
     }),
   ],

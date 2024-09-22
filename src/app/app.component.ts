@@ -44,10 +44,11 @@ export class AppComponent implements OnInit {
   }
 
   runGet() {
+    this.httpClient.get("https://localhost:7072/webapiexample/error").subscribe(data => {
+      console.log("GET:", data);
+    })
 
-    
-    this.httpClient.get("https://localhost:7144/error").subscribe(data => {
-
+    this.httpClient.get("https://localhost:7072/webapiexample/GetCarList").subscribe(data => {
       console.log("GET:", data);
     })
   }
