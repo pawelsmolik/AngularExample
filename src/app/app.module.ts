@@ -5,15 +5,23 @@ import { AppComponent } from './app.component';
 import { authInterceptor, AuthModule, LogLevel } from 'angular-auth-oidc-client';
 import { CommonModule } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { CompositePropagatorModule, OpenTelemetryHttpInterceptor, OpenTelemetryInterceptorModule, OTEL_INSTRUMENTATION_PLUGINS, OtelColExporterModule, OtelWebTracerModule, ZipkinExporterModule } from '@jufab/opentelemetry-angular-interceptor';
+import { environment } from '../environments/environment';
+import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xml-http-request';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    ZipkinExporterModule,
     BrowserModule,
     AppRoutingModule,
     CommonModule,
+    OpenTelemetryInterceptorModule.forRoot(environment.openTelemetryConfig),
+    //OtelColExporterModule,
+    CompositePropagatorModule,
+    OtelWebTracerModule.forRoot(environment.openTelemetryConfig),
     AuthModule.forRoot({
       config: {
         authority: 'https://localhost:7130',
@@ -30,7 +38,9 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
     }),
   ],
   providers: [
-    provideHttpClient(withInterceptors([authInterceptor()]))
+    provideHttpClient(withInterceptors([authInterceptor()])),
+    {provide: OTEL_INSTRUMENTATION_PLUGINS, useValue: [new XMLHttpRequestInstrumentation()]},
+    OpenTelemetryHttpInterceptor
   ],
   bootstrap: [AppComponent]
 })
