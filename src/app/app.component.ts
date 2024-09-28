@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { LoginResponse, OidcSecurityService } from 'angular-auth-oidc-client';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -44,11 +45,11 @@ export class AppComponent implements OnInit {
   }
 
   runGet() {
-    this.httpClient.get("https://localhost:7072/webapiexample/error").subscribe(data => {
+    this.httpClient.get(environment.reverseProxyUrl + "/webapiexample/error").subscribe(data => {
       console.log("GET:", data);
     })
 
-    this.httpClient.get("https://localhost:7072/webapiexample/GetCarList").subscribe(data => {
+    this.httpClient.get(environment.reverseProxyUrl + "/webapiexample/GetCarList").subscribe(data => {
       console.log("GET:", data);
     })
   }

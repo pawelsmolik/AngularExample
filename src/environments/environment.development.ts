@@ -7,6 +7,8 @@ interface IEnvironment {
   production: boolean;
   urlTest: string;
   openTelemetryConfig: OpenTelemetryConfig;
+  identityServerUrl: string;
+  reverseProxyUrl: string;
 }
 
 // Example to configure the angular-interceptor library
@@ -30,5 +32,7 @@ export const environment: IEnvironment = {
     otelcolConfig: {
         url: 'http://localhost:4318/v1/traces', //URL of opentelemetry collector
     },
-  }
+  },
+  identityServerUrl: "https://identityserverexample.azurewebsites.net",
+  reverseProxyUrl: "https://reverseproxy1.azurewebsites.net"
 };
