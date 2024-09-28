@@ -26,6 +26,9 @@ export const environment: IEnvironment = {
     },
     b3PropagatorConfig: {
       multiHeader: '0' //Value : 'O' (single), '1' (multi)
-    }
+    },
+    otelcolConfig: {
+        url: 'http://localhost:4318/v1/traces', //URL of opentelemetry collector
+    },
   }
 };

@@ -24,7 +24,7 @@ import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xm
     OtelWebTracerModule.forRoot(environment.openTelemetryConfig),
     AuthModule.forRoot({
       config: {
-        authority: 'https://localhost:7130',
+        authority: environment.identityServerUrl,
         redirectUrl: window.location.origin,
         postLogoutRedirectUri: window.location.origin,
         clientId: 'AngularExampleAppFront',
@@ -33,7 +33,7 @@ import { XMLHttpRequestInstrumentation } from '@opentelemetry/instrumentation-xm
         silentRenew: true,
         useRefreshToken: true,
         logLevel: LogLevel.Debug,
-        secureRoutes: ['https://localhost:7144/', 'https://localhost:7072/'],
+        secureRoutes: ['https://localhost:7144/', 'https://localhost:7072/', environment.reverseProxyUrl],
       },
     }),
   ],
