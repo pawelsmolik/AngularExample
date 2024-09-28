@@ -9,4 +9,4 @@ RUN npm run build_prod
 ### STAGE 2: Run ###
 FROM nginx:latest
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/angular-example /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/angular-example/browser /usr/share/nginx/html
