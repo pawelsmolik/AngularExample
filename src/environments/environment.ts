@@ -5,7 +5,6 @@ import {
 
 interface IEnvironment {
   production: boolean;
-  openTelemetryEnable: boolean;
   openTelemetryConfig: OpenTelemetryConfig;
   authOptions: AuthOptions;
   reverseProxyUrl: string;
@@ -20,10 +19,9 @@ interface AuthOptions {
 // Example to configure the angular-interceptor library
 export const environment: IEnvironment = {
   production: true,
-  openTelemetryEnable: false,
   openTelemetryConfig: {
     commonConfig: {
-      console: true, // Display trace on console
+      console: false, // Display trace on console
       production: true, // Send Trace with BatchSpanProcessor (true) or SimpleSpanProcessor (false)
       serviceName: 'Angularexample', // Service name send in trace
       probabilitySampler: '1', // 75% sampling

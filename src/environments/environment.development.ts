@@ -5,7 +5,6 @@ import {
 
 interface IEnvironment {
   production: boolean;
-  openTelemetryEnable: boolean;
   openTelemetryConfig: OpenTelemetryConfig;
   authOptions: AuthOptions;
   reverseProxyUrl: string;
@@ -20,7 +19,6 @@ interface AuthOptions {
 // Example to configure the angular-interceptor library
 export const environment: IEnvironment = {
   production: true,
-  openTelemetryEnable: true,
   openTelemetryConfig: {
     commonConfig: {
       console: true, // Display trace on console
