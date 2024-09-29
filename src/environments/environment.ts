@@ -5,16 +5,22 @@ import {
 
 interface IEnvironment {
   production: boolean;
-  urlTest: string;
+  openTelemetryEnable: boolean;
   openTelemetryConfig: OpenTelemetryConfig;
-  identityServerUrl: string;
+  authOptions: AuthOptions;
   reverseProxyUrl: string;
+}
+
+interface AuthOptions {
+  authority: string,
+  clientId: string,
+  secureRoutes: string[]
 }
 
 // Example to configure the angular-interceptor library
 export const environment: IEnvironment = {
   production: true,
-  urlTest: 'http://localhost:4200',
+  openTelemetryEnable: false,
   openTelemetryConfig: {
     commonConfig: {
       console: true, // Display trace on console
@@ -33,6 +39,10 @@ export const environment: IEnvironment = {
         url: 'http://localhost:4318/v1/traces', //URL of opentelemetry collector
     },
   },
-  identityServerUrl: "https://identityserverexample.azurewebsites.net",
-  reverseProxyUrl: "https://reverseproxy1.azurewebsites.net"
+  authOptions: {
+    authority: 'https://identityserverexample.azurewebsites.net',
+    clientId: 'AngularExampleAppFront',
+    secureRoutes: ['https://reverseproxy1.azurewebsites.net/']
+  },
+  reverseProxyUrl: 'https://reverseproxy1.azurewebsites.net'
 };

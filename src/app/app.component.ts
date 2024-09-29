@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
 
-  private accessToken: string = '';
+  public carList: any[] = [];
   constructor(private httpClient: HttpClient){}
 
   title = 'angular-example';
@@ -21,20 +21,13 @@ export class AppComponent implements OnInit {
     this.oidcSecurityService
       .checkAuth()
       .subscribe((loginResponse: LoginResponse) => {
-        const { isAuthenticated, userData, accessToken, idToken, configId } =
-          loginResponse;
-          this.accessToken = accessToken
-        console.log("idToken", idToken);
-        console.log("accessToken", accessToken);
+        const { isAuthenticated, userData, accessToken, idToken, configId } = loginResponse;
       });
     
-      this.oidcSecurityService.getRefreshToken().subscribe(token => {
-        console.log("refeash token", token)
-      });
+      this.oidcSecurityService.getRefreshToken().subscribe(token => {});
   }
 
   login() {
-    console.log("Login!!")
     this.oidcSecurityService.authorize();
   }
 
@@ -45,12 +38,9 @@ export class AppComponent implements OnInit {
   }
 
   runGet() {
-    this.httpClient.get(environment.reverseProxyUrl + "/webapiexample/error").subscribe(data => {
-      console.log("GET:", data);
-    })
-
+    this.carList = [];
     this.httpClient.get(environment.reverseProxyUrl + "/webapiexample/GetCarList").subscribe(data => {
-      console.log("GET:", data);
+      this.carList = (data as any).response;
     })
   }
 }

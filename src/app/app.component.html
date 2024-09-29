@@ -2,3 +2,11 @@ App
 <input type="button" (click)="login()" value="Login">
 <input type="button" (click)="logout()" value="Logout">
 <input type="button" (click)="runGet()" value="Get">
+<br><br>
+<table>
+    <tr *ngFor="let element of carList;">
+        <td>
+            {{element}}
+        </td>
+    </tr>
+</table>
